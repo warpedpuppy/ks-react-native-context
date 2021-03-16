@@ -12,7 +12,7 @@ const firebase = require('firebase');
 require('firebase/firestore');
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
-
+import AppContext from '../AppContext';
 
 export default class Chat extends React.Component{
     constructor() {
@@ -30,13 +30,13 @@ export default class Chat extends React.Component{
         }
 
         const firebaseConfig = {
-            apiKey: "AIzaSyCY4cMbkznojqhmg94p6eFFqHmFbUP-2f8",
-            authDomain: "chat-app-11762.firebaseapp.com",
-            projectId: "chat-app-11762",
-            storageBucket: "chat-app-11762.appspot.com",
-            messagingSenderId: "1094671831669",
-            appId: "1:1094671831669:web:f1f6cacb335dbf23eb1e3c",
-            measurementId: "G-MLDD6PXQRB"
+            apiKey: "AIzaSyBQ0l3BqF5b5UczVr6U4q4g2nUWoBSQ1zc",
+            authDomain: "test-183b4.firebaseapp.com",
+            projectId: "test-183b4",
+            storageBucket: "test-183b4.appspot.com",
+            messagingSenderId: "820936259648",
+            appId: "1:820936259648:web:10f56afb9569c1236a07a5",
+            measurementId: "G-CHMTEGV545"
 
         }
 
@@ -146,7 +146,7 @@ export default class Chat extends React.Component{
             this.setState({
                 user: {
                     _id: user.uid,
-                    name: this.props.route.params.name,
+                    name: this.context.name,
                     avatar: 'https://placeimg.com/140/140/any'
                 },
                 messages: [],
@@ -215,8 +215,8 @@ export default class Chat extends React.Component{
 
     render() {
         // pulling props from Start.js as passed in onPress
-        const {name, color} = this.props.route.params;
-
+        const { color } = this.props.route.params;
+        const { name } = this.context;
         // props user's name into title of chat message
         this.props.navigation.setOptions({ title: name })
 
@@ -236,7 +236,7 @@ export default class Chat extends React.Component{
         )
     }
 }
-
+Chat.contextType = AppContext;
 const styles = StyleSheet.create({
     loggedInText: {
         textAlign: 'center',

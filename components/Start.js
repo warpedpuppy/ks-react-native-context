@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     } from 'react-native';
 import { Icon } from 'react-native-elements';
+import AppContext from '../AppContext';
 
 const image = require('../assets/background-image.png')
 
@@ -24,7 +25,8 @@ export default class Start extends React.Component{
 
  render() {
      const {navigation} = this.props;
-     const {name, color} = this.state;
+     const {color} = this.state;
+     const {name} = this.context;
     return (
         <ImageBackground source={image} style={styles.image}>
             <Text style={styles.title}>ChatApp</Text>
@@ -36,7 +38,7 @@ export default class Start extends React.Component{
                     <TextInput 
                     style={styles.yourName}
                     placeholder='Your Name'
-                    onChangeText={(name) => this.setState({name})}
+                    onChangeText={(name) => this.context.changeName(name)}
                     value={name}
                     />
                 </View>
@@ -97,7 +99,7 @@ export default class Start extends React.Component{
     )
 }
 }
-
+Start.contextType = AppContext;
 const styles = StyleSheet.create({
     // where is container used??
     container: {
